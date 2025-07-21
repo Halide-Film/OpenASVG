@@ -63,7 +63,7 @@ Here's a quick example of how to embed and play an OpenASVG animation:
     <canvas id="myAsvgCanvas"></canvas>
 
     <!-- Include the OpenASVG library -->
-    <script src="path/to/openasvg.js"></script>
+    <script src="./openasvg.js"></script>
     <script>
         const asvgContent = `<?xml version="1.0" encoding="UTF-8"?>
 <asvg version="2025.7" xmlns="http://halide.org/openasvg/2025.7"
