@@ -47,68 +47,69 @@ Simply include the openasvg.js library in your HTML:
 ### Basic Usage
 
 Here's a quick example of how to embed and play an OpenASVG animation:
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenASVG Example</title>
+    <style>
+        body { margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #f0f2f5; }
+        canvas { border: 1px solid #ccc; display: block; }
+    </style>
+</head>
+<body>
+    <canvas id="myAsvgCanvas"></canvas>
 
-&lt;!DOCTYPE html> \
-&lt;html lang="en"> \
-&lt;head> \
-    &lt;meta charset="UTF-8"> \
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"> \
-    &lt;title>OpenASVG Example&lt;/title> \
-    &lt;style> \
-        body { margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #f0f2f5; } \
-        canvas { border: 1px solid #ccc; display: block; } \
-    &lt;/style> \
-&lt;/head> \
-&lt;body> \
-    &lt;canvas id="myAsvgCanvas">&lt;/canvas> \
- \
-    &lt;!-- Include the OpenASVG library --> \
-    &lt;script src="path/to/openasvg.js">&lt;/script> \
-    &lt;script> \
-        const asvgContent = `&lt;?xml version="1.0" encoding="UTF-8"?> \
-&lt;asvg version="2025.7" xmlns="http://halide.org/openasvg/2025.7" \
-      xmlns:svg="http://www.w3.org/2000/svg" \
-      width="400" height="400" duration="2s" loop="true"> \
-    &lt;timeline> \
-        &lt;animate target="#circle" attribute="r" \
-                 from="20" to="80" duration="1s" \
-                 easing="ease-in-out" repeat="infinite" \
-                 reverse="true" /> \
-    &lt;/timeline> \
-    &lt;svg:svg viewBox="0 0 400 400"> \
-        &lt;svg:circle \
-            id="circle" \
-            cx="200" cy="200" r="20" \
-            fill="#4a90e2" /> \
-    &lt;/svg:svg> \
-&lt;/asvg>`; \
- \
-        const canvas = document.getElementById('myAsvgCanvas'); \
-        canvas.width = 400; \
-        canvas.height = 400; \
- \
-        const asvgAnimation = new OpenASVG(asvgContent, { \
-            autoplay: true, \
-            loop: true \
-        }); \
- \
-        asvgAnimation.on('ready', () => { \
-            asvgAnimation.render(canvas); \
-        }); \
- \
-        asvgAnimation.on('update', () => { \
-            asvgAnimation.render(canvas); \
-        }); \
- \
-        // Optional: Handle canvas resizing \
-        window.addEventListener('resize', () => { \
-            canvas.width = canvas.offsetWidth; \
-            canvas.height = canvas.offsetHeight; \
-            asvgAnimation.render(canvas); \
-        }); \
-    &lt;/script> \
-&lt;/body> \
-&lt;/html> \
+    <!-- Include the OpenASVG library -->
+    <script src="path/to/openasvg.js"></script>
+    <script>
+        const asvgContent = `<?xml version="1.0" encoding="UTF-8"?>
+<asvg version="2025.7" xmlns="http://halide.org/openasvg/2025.7"
+      xmlns:svg="http://www.w3.org/2000/svg"
+      width="400" height="400" duration="2s" loop="true">
+    <timeline>
+        <animate target="#circle" attribute="r"
+                 from="20" to="80" duration="1s"
+                 easing="ease-in-out" repeat="infinite"
+                 reverse="true" />
+    </timeline>
+    <svg:svg viewBox="0 0 400 400">
+        <svg:circle
+            id="circle"
+            cx="200" cy="200" r="20"
+            fill="#4a90e2" />
+    </svg:svg>
+</asvg>`;
+
+        const canvas = document.getElementById('myAsvgCanvas');
+        canvas.width = 400;
+        canvas.height = 400;
+
+        const asvgAnimation = new OpenASVG(asvgContent, {
+            autoplay: true,
+            loop: true
+        });
+
+        asvgAnimation.on('ready', () => {
+            asvgAnimation.render(canvas);
+        });
+
+        asvgAnimation.on('update', () => {
+            asvgAnimation.render(canvas);
+        });
+
+        // Optional: Handle canvas resizing
+        window.addEventListener('resize', () => {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            asvgAnimation.render(canvas);
+        });
+    </script>
+</body>
+</html>
+```
 
 
 
@@ -117,32 +118,21 @@ Here's a quick example of how to embed and play an OpenASVG animation:
 OpenASVG content can be integrated into web pages using standard HTML elements or CSS properties.
 
 
-### Using the &lt;object> Tag
+### Using the <object> Tag
 
-The &lt;object> tag is a versatile way to embed external content, including ASVG files. It also allows for fallback content if the browser cannot display the ASVG.
-
-&lt;object data="animation.asvg" type="image/asvg+xml"> \
-    &lt;!-- Fallback content if ASVG is not supported --> \
-    &lt;img src="fallback.svg" alt="Animation" /> \
-&lt;/object> \
-
+The <object> tag is a versatile way to embed external content, including ASVG files. It also allows for fallback content if the browser cannot display the ASVG.
+```
+<object data="animation.asvg" type="image/asvg+xml">
+    <!-- Fallback content if ASVG is not supported -->
+    <img src="fallback.svg" alt="Animation" />
+</object>
+```
 
 
 
 * The data attribute specifies the path to your ASVG file.
 * The type attribute should be set to image/asvg+xml.
-* Content inside the &lt;object> tags will be displayed if the ASVG cannot be rendered.
-
-
-### Using CSS Background Images
-
-You can also use ASVG files as background images in CSS.
-
-.element { \
-    background-image: url('animation.asvg'); \
-    animation: asvg-play 2s infinite; /* Example CSS animation property */ \
-    /* Other CSS properties */ \
-} \
+* Content inside the <object> tags will be displayed if the ASVG cannot be rendered.
 
 
 
@@ -154,13 +144,8 @@ You can also use ASVG files as background images in CSS.
 ## 🛠️ Tools
 
 
+* **ASVG Viewer:** A cross-platform app for viewing .asvg files. Download links coming soom.
 
-* **ASVG Viewer:** A reference implementation for viewing .asvg files.
-
-
-## 📄 Documentation
-
-For a comprehensive understanding of the OpenASVG standard, its API, and advanced features, please refer to the [official documentation](https://www.google.com/search?q=http://halidefilms.net/openasvg/documentation).
 
 
 ## ⚖️ License
